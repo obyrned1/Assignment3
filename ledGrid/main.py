@@ -10,6 +10,7 @@ def main(filename,N):
     
 
 
+
 class LightTester():
     
     lights = None
@@ -24,6 +25,24 @@ class LightTester():
             #do something to switch it on
         elif
             #insert other if statements for other scenarios
+    
+     def file_exists(filename):
+    '''Checks if a file exists in the local address or a network address'''
+
+
+    def ignoring_commands(filename):
+    '''Ignore any commands which are not "turn on", "turn off" or "switch" '''
+    
+    def turn_on():
+    '''turns on lights given coordinates, if they are currently off'''
+
+     def turn_off():
+     '''turns on lights given coordinates, if they are currently off'''
+    
+    
+    def within_region(filename):
+    '''Checks if coordinates given are outside grid, ignores points outside grid and lights up parts inside'''
+           
         
     def count(self):
         return count
