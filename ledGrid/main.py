@@ -19,6 +19,17 @@ def file_exists(filename):
         returned_file = open(filename, 'r')
     return returned_file
 
+def convert_file (filename):
+    '''takes the file and turns it into a string to be read, in order to turn on and off'''
+    if filename.startswith('http://'):
+        returned_file = urllib.request.urlopen(filename)
+        #this retrieves the file 
+        contents_returned_file = returned_file.read()
+        #this reads the returned file and converts it int a string
+    else:
+        contents_returned_file = open(filename, 'r')
+    return contents_returned_file
+
 
 
 class LightTester():
