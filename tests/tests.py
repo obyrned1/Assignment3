@@ -15,7 +15,12 @@ def test_file_exists():
 def test_string_convert():
     test_file = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt"
     output = string_convert(test_file) 
-    assert output[0] == ('switch', '109', '360', '331', '987')
+    assert output[0] == ('switch', '109', '360', '331', '987') 
+
+def test_coordinates():
+    test_string = ('109','360')
+    output = coordinates(test_string)
+    assert output == [109,360]
 
 
 

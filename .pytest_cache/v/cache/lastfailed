@@ -1,1 +1,3 @@
-{}
+{
+  "tests/tests.py::test_coordinates": true
+}

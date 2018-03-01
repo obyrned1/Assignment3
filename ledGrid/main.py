@@ -4,15 +4,6 @@ import urllib.request
 import re
 
 
-def main(filename,N):
-    lights = LightTester(N)
-    instructions = parse_file(filename)
-    for cmd in instruction:
-        lights.apply(cmd)
-        
-    print("# occupied", light.count())
-
-
 def file_exists(filename):
     '''Checks if a file exists in the local address or a network address that is given'''
     if filename.startswith('http://'):
@@ -31,6 +22,14 @@ def string_convert(filename):
     clean_string = re.findall(r".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", string)
     return clean_string
 
+def coordinates(string):
+    '''takes in a string which is parsed from the output of string_convert and assigns coordinates to start and stop values, converts them to ints'''
+    start = int(string[0])
+    end = int(string[1])
+    point = [start,end]
+    return point
+
+
 #hello = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt"
 #print(string_convert(hello))
 
@@ -43,8 +42,16 @@ class LightTester():
         self.lights = [[False]*N for _ in range(N)]
         self.size = N
         
-   
+def main(filename,N):
+    lights = LightTester(N)
+    instructions = parse_file(filename)
+    for cmd in instruction:
+        lights.apply(cmd)
         
+    print("# occupied", light.count())   
+
+    
+     
         
     
             
