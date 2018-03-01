@@ -59,7 +59,23 @@ def test_turn_off():
     # both counts should be = 101*101 = 10201
 
     
+def test_switch():
+    '''test if the switch function turns a true to a false and vice versa given cooridnates'''
+    test = LightTester(1000)
+    test.turn_on([0,0],[100,100])
+    # run the same test as the test_turn_on, then call the function switch and see if all Trues have been reversed to false
+    # check by counting all false in the 999 x 999 square
+    test.switch([0,0],[100,100]) 
+    switched = 0
+    for i in range (0, 1000):
+        for j in range (0, 1000):
+            if test.lights[i][j] == False:
+                switched += 1 
+    assert switched == 1000000
+    # 1000 * 1000 = 1000000
     
+                
+                
 #def test_ignoring_commands():
     
 #def test_turn_on():

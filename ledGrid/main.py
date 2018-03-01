@@ -80,6 +80,19 @@ class LightTester():
                 for j in range (start[1], (stop[1] + 1)):
                     self.lights[i][j] = False
                     
+    def switch(self, start, stop):
+        '''checks to see if a light is on/off and switches it to off/on. Brings previous two functions together'''
+        if start[0] <= stop[0] and start[1] <= stop[1]:
+        #assumes that start points are below (to the left) of stop points of per assignment slides
+            for i in range (start[0], (stop[0] + 1)):
+                for j in range (start[1], (stop[1] + 1)):
+                    if self.lights[i][j] == False:
+                        self.lights[i][j] = True
+                    else:
+                         self.lights[i][j] = False
+                    
+                    
+                    
 def main(filename,N):
     lights = LightTester(N)
     instructions = parse_file(filename)
