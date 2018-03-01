@@ -29,18 +29,43 @@ def coordinates(string):
     point = [start,end]
     return point
 
-
-#hello = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt"
-#print(string_convert(hello))
-
 class LightTester():
     
     lights = None
     
     def __init__(self,N):
         ''' LED grid has N x N number of lights. All lights start as off'''
-        self.lights = [[False]*N for _ in range(N)]
+        #N will be defined in the main function when the LightTester is called.
+        self.lights = [[0]*N for _ in range(N)]
         self.size = N
+        
+    def within_grid(self, start, stop):
+        ''' this function checks if a stop or start point from instruction is within the size of the grid. If not, changes the value'''
+        x1 = start[0]
+        y1 = start[1]
+        x2 = stop[0]
+        x2 = stop[1]
+        # all points have to be greater than or equal to zero and less than or equal to size of grid
+        # this assumes that start points aren't necessarily always nearer the (0,0) i.e. that why I check is start greater than grid size
+        #start point
+        if x1 < 0:
+            x1 == 0
+        if y1 < 0:
+            y1 == 0
+        if x1 >= self.size:
+            x1 == self.size
+        if y1 >= self.size:
+            y1 == self.size
+        if x2 < 0:
+            x2 == 0
+        if y2 < 0:
+            y2 == 0
+        if x2 >= self.size:
+            x2 == self.size
+        if y2 >= self.size:
+            y2 == self.size
+        return start, stop
+        
         
 def main(filename,N):
     lights = LightTester(N)

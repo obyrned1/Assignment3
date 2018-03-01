@@ -1,3 +1,3 @@
 {
-  "tests/tests.py::test_coordinates": true
+  "tests/tests.py::test_within_grid": true
 }
