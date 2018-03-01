@@ -1,6 +1,7 @@
 '''This is the test file'''
 
 import sys
+sys.path.append('.')
 
 from ledGrid.main import *
 
@@ -11,12 +12,11 @@ def test_file_exists():
     # as per practical, assert and call the function in main with test file
     # test that the result isn't empty
     
-def test_convert_file():
+def test_string_convert():
     test_file = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt"
-    # give a test file for testing. Will return error if it's not a real link
-    assert convert_file(test_file) != " "
-    # as per practical, assert and call the function in main with test file
-    # test that the result isn't empty
+    assert string_convert(test_file) 
+
+
 
     
     

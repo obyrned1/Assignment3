@@ -1,6 +1,7 @@
-'''Main file'''
+# this is the Main file
 import sys 
 import urllib.request
+import re
 
 
 def main(filename,N):
@@ -11,26 +12,27 @@ def main(filename,N):
         
     print("# occupied", light.count())
 
+
 def file_exists(filename):
     '''Checks if a file exists in the local address or a network address that is given'''
     if filename.startswith('http://'):
         returned_file = urllib.request.urlopen(filename)
+        contents_returned_file = returned_file.read().decode('utf-8') 
+        #this reads the returned file and converts it into a string
     else:
         returned_file = open(filename, 'r')
-    return returned_file
-
-def convert_file (filename):
-    '''takes the file and turns it into a string to be read, in order to turn on and off'''
-    if filename.startswith('http://'):
-        returned_file = urllib.request.urlopen(filename)
-        #this retrieves the file 
         contents_returned_file = returned_file.read()
-        #this reads the returned file and converts it int a string
-    else:
-        contents_returned_file = open(filename, 'r')
     return contents_returned_file
 
 
+def string_convert(filename):
+    '''takes the string return from file_exists and filters out any responses that aren't turn on/off or switch'''
+    string = file_exists(filename)
+    clean_string = re.findall(r".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", string)
+    return clean_string
+
+#hello = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt"
+#print(string_convert(hello))
 
 class LightTester():
     
@@ -57,7 +59,6 @@ class LightTester():
 #        # elif
 #             #insert other if statements for other scenarios
 #     
-#      
 # 
 #     def ignoring_commands(filename):
 #     '''Ignore any commands which are not "turn on", "turn off" or "switch" '''
