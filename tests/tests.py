@@ -28,6 +28,24 @@ def test_within_grid():
     test_startstop = grid.within_grid([-123,123],[2000,1200])
     assert test_startstop == ([0,123],[999,999])
 
+def test_turn_on():
+    '''test if area covered by given coordinates are converted to True'''
+    test = LightTester(1000)
+    #call the light tester class with N of size 1000
+    test.turn_on([0,0],[100,100])
+    # create a test area which has 101*101 lights 
+    on = 0
+    # going to count the lights on in this area, set count to 0
+    for i in range (0, 1000):
+        for j in range (0, 1000):
+            #looping through each row and each columns in the grid
+            if test.lights[i][j] == True:
+                #if the test_grid function has returned true in one of these spaces, count it
+                on += 1
+    assert on == 10201
+    # both counts should be = 101*101 = 10201
+    
+
 
     
     
