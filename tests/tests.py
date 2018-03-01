@@ -33,7 +33,7 @@ def test_turn_on():
     test = LightTester(1000)
     #call the light tester class with N of size 1000
     test.turn_on([0,0],[100,100])
-    # create a test area which has 101*101 lights 
+    # create a test area which has 101*101 lights on
     on = 0
     # going to count the lights on in this area, set count to 0
     for i in range (0, 1000):
@@ -45,7 +45,18 @@ def test_turn_on():
     assert on == 10201
     # both counts should be = 101*101 = 10201
     
-
+def test_turn_off():
+    '''test if area covered by given coordinates are converted to False'''
+    #same as test above for turn_on, just opposite
+    test = LightTester(1000)
+    test.turn_on([0,0],[100,100])
+    off = 0
+    for i in range (0, 1000):
+        for j in range (0, 1000):
+            if test.lights[i][j] == True:
+                off += 1
+    assert off == 10201
+    # both counts should be = 101*101 = 10201
 
     
     

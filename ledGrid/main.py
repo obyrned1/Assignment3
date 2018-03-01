@@ -71,7 +71,15 @@ class LightTester():
             for i in range (start[0], (stop[0] + 1)):
                 for j in range (start[1], (stop[1] + 1)):
                     self.lights[i][j] = True
-        
+                    
+    def turn_off(self, start, stop):
+        '''turns off lights given the start and stop coordinates. False is off'''
+        if start[0] <= stop[0] and start[1] <= stop[1]:
+        #assumes that start points are below (to the left) of stop points of per assignment slides
+            for i in range (start[0], (stop[0] + 1)):
+                for j in range (start[1], (stop[1] + 1)):
+                    self.lights[i][j] = False
+                    
 def main(filename,N):
     lights = LightTester(N)
     instructions = parse_file(filename)
