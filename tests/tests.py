@@ -14,7 +14,8 @@ def test_file_exists():
     
 def test_string_convert():
     test_file = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt"
-    assert string_convert(test_file) 
+    output = string_convert(test_file) 
+    assert output[0] == ('switch', '109', '360', '331', '987')
 
 
 
