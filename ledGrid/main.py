@@ -41,6 +41,7 @@ class LightTester():
         
     def within_grid(self, start, stop):
         ''' this function checks if a stop or start point from instruction is within the size of the grid. If not, changes the value'''
+        # use self.size -1 as its 1000*1000 square where the max value is 999
         
         if start[0] < 0:
             start[0] = 0
@@ -90,8 +91,19 @@ class LightTester():
                         self.lights[i][j] = True
                     else:
                          self.lights[i][j] = False
-                    
-                    
+    
+    def light_count(self):
+        '''count all occurrences of true that after all commands have been dealt with by on off and switch function'''  
+        count = 0
+        #loop through all rows and columns and count Trues  
+        start = [0,0]
+        stop = [999,999] 
+        for i in range (start[0], (stop[0] + 1)):
+                for j in range (start[1], (stop[1] + 1)):
+                    if self.lights[i][j] == True:
+                        count +=1
+        return count     
+                  
                     
 def main(filename,N):
     lights = LightTester(N)

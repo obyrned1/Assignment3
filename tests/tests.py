@@ -74,15 +74,17 @@ def test_switch():
     assert switched == 1000000
     # 1000 * 1000 = 1000000
     
-                
-                
-#def test_ignoring_commands():
+                             
+def test_light_count():
+    '''tests the light count function, runs turn_on function, then calls light_count to check if the counts are equal'''
+    test = LightTester(1000)
+    test.turn_on([0,0],[100,100])
+    assert test.light_count() == 10201
     
-#def test_turn_on():
     
-
-#def test_turn_off():
-
     
-#def test_within_region(filename):
-       
+    
+    
+    
+    
+    
