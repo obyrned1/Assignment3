@@ -17,10 +17,10 @@ def file_exists(filename):
 
 
 def string_convert(filename):
-    '''takes the string return from file_exists and filters out any responses that aren't turn on/off or switch'''
+    '''takes the string returned from file_exists and filters out any responses that aren't turn on/off or switch, converts to one big array'''
     string = file_exists(filename)
-    clean_string = re.findall(r".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", string)
-    return clean_string
+    converted_string = re.findall(r".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", string)
+    return converted_string
 
 def coordinates(string):
     '''takes in a string which is parsed from the output of string_convert and assigns coordinates to start and stop values, converts them to ints'''
@@ -105,13 +105,28 @@ class LightTester():
         return count     
                   
                     
-def main(filename,N):
-    lights = LightTester(N)
-    instructions = parse_file(filename)
-    for cmd in instruction:
-        lights.apply(cmd)
+def main():
+    if len(sys.argv) < 3:
+        # sys.argv is used to read arguments from the command line
+        print("Please check parameters: third argument must be the input file") 
+    else:
+        #index two of sys.argv is the file/http address
+        commands_list = file_exists(sys.argv[2])
+        # returns contents of file in a string
+        commands_array = string_convert(filename)
+        # converts that string to a structured array
+        num_light = commands_list[0]
         
-    print("# occupied", light.count())   
+        
+        
+    #===========================================================================
+    # lights = LightTester(N)
+    # instructions = parse_file(filename)
+    # for cmd in instruction:
+    #     lights.apply(cmd)
+    #     
+    # print("# occupied", light.count())   
+    #===========================================================================
 
     
      
