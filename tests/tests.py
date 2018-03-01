@@ -25,8 +25,8 @@ def test_coordinates():
 def test_within_grid():
     '''test check if coordinates for a start and stop point that are outside the grid, convert to 0 or the size of grid if they are less or more than those figures'''
     grid = LightTester(1000)
-    test_startstop = ([-123,123],[2000,1200])
-    assert test_startstop == ([0,123],[1000,1000])
+    test_startstop = grid.within_grid([-123,123],[2000,1200])
+    assert test_startstop == ([0,123],[999,999])
 
 
     
