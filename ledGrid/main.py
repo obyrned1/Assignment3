@@ -2,6 +2,7 @@
 import sys 
 import urllib.request
 import re
+from pip import commands
 
 
 def file_exists(filename):
@@ -24,9 +25,9 @@ def string_convert(filename):
 
 def coordinates(string):
     '''takes in a string which is parsed from the output of string_convert and assigns coordinates to start and stop values, converts them to ints'''
-    start = int(string[0])
-    end = int(string[1])
-    point = [start,end]
+    x = int(string[0])
+    y = int(string[1])
+    point = [x,y]
     return point
 
 class LightTester():
@@ -115,12 +116,22 @@ def main():
         # returns contents of file in a string
         commands_array = string_convert(filename)
         # converts that string to a structured array
-        num_light = commands_list[0]
+        num_lights = commands_list.split('\n')[0]
+        # this takes the first line of the commands, which is always the N number of lights in the grid
+        lights = LightTester(num_lights)
+        
+        # now have number of lights and array with instructions
+        # need to loop through each index and first extract the start and stop points
+        # then extract the command, and call the relevant function using the stop and start points
+        for i in range(0,num_lights):
+            start_point = coordinates(commands_array[i][1:3]) 
+            stop_point = coordinates(commands_array[i][3:5])
+            if commands_array[i][0] == ""
         
         
         
     #===========================================================================
-    # lights = LightTester(N)
+    # 
     # instructions = parse_file(filename)
     # for cmd in instruction:
     #     lights.apply(cmd)
