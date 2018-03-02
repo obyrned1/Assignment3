@@ -107,10 +107,7 @@ class LightTester():
                   
                     
 def main():
-    if len(sys.argv) < 3:
-        # sys.argv is used to read arguments from the command line
-        print("Please check parameters: third argument must be the input file") 
-    else:
+    if len(sys.argv) >= 3:     
         #index two of sys.argv is the file/http address
         commands_list = file_exists(sys.argv[2])
         # returns contents of file in a string
@@ -126,50 +123,23 @@ def main():
         for i in range(0,num_lights):
             start_point = coordinates(commands_array[i][1:3]) 
             stop_point = coordinates(commands_array[i][3:5])
-            if commands_array[i][0] == ""
+            command = commands_array[i][0]
+             #The next three if statements call the necessary method with our start and stop points 
+            if command == "turn on":
+               lights.lightsturn_on(start_point, stop_point)                
+            if command == "turn off":
+                 lights.turn_off(start_point, stop_point)
+            if command == "switch":
+                 lights.switch(start_point, stop_point)
         
+        #after these adjustments, need to count the lights which are on using the light_count function  
+        print(lights.light_count())
         
-        
-    #===========================================================================
-    # 
-    # instructions = parse_file(filename)
-    # for cmd in instruction:
-    #     lights.apply(cmd)
-    #     
-    # print("# occupied", light.count())   
-    #===========================================================================
-
-    
+    else:    
+    # sys.argv is used to read arguments from the command line
+        print("Please check parameters: third argument must be the input file") 
      
         
     
             
 
-#===============================================================================
-#         
-#     def apply(self,cmd):
-#         if cmd is 'switch on':
-#             #do something to switch it off
-#         #elif cmd is 'switch off':
-#             #do something to switch it on
-#        # elif
-#             #insert other if statements for other scenarios
-#     
-# 
-#     def ignoring_commands(filename):
-#     '''Ignore any commands which are not "turn on", "turn off" or "switch" '''
-#     
-#     
-# 
-#      def turn_off():
-#      '''turns on lights given coordinates, if they are currently off'''
-#     
-#     
-#     def within_region(filename):
-#     '''Checks if coordinates given are outside grid, ignores points outside grid and lights up parts inside'''
-#            
-#         
-#     def count(self):
-#         return count
-#         #this should count the number of lights that are on
-#===============================================================================
