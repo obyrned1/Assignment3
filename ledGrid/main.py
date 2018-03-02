@@ -12,16 +12,15 @@ def file_exists(filename):
         contents_returned_file = returned_file.read().decode('utf-8') 
         #this reads the returned file and converts it into a string
     else:
-        returned_file = open(filename, 'r')
-        contents_returned_file = returned_file.read()
+        contents_returned_file = open(filename, 'r').read()
     return contents_returned_file
 
 
 def string_convert(filename):
     '''takes the string returned from file_exists and filters out any responses that aren't turn on/off or switch, converts to one big array'''
-    string = file_exists(filename)
-    converted_string = re.findall(r".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", string)
+    converted_string = re.findall(r".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*", filename)
     return converted_string
+    
 
 def coordinates(string):
     '''takes in a string which is parsed from the output of string_convert and assigns coordinates to start and stop values, converts them to ints'''
@@ -107,13 +106,14 @@ class LightTester():
                   
                     
 def main():
-    if len(sys.argv) >= 3:     
+   # if len(sys.argv) >= 3:     
         #index two of sys.argv is the file/http address
-        commands_list = file_exists(sys.argv[2])
+        commands_list = file_exists("http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt")
         # returns contents of file in a string
-        commands_array = string_convert(filename)
+        commands_array = string_convert(commands_list)
+        print(commands_array)
         # converts that string to a structured array
-        num_lights = commands_list.split('\n')[0]
+        num_lights = int(commands_list.split('\n')[0])
         # this takes the first line of the commands, which is always the N number of lights in the grid
         lights = LightTester(num_lights)
         
@@ -126,7 +126,7 @@ def main():
             command = commands_array[i][0]
              #The next three if statements call the necessary method with our start and stop points 
             if command == "turn on":
-               lights.lightsturn_on(start_point, stop_point)                
+               lights.turn_on(start_point, stop_point)                
             if command == "turn off":
                  lights.turn_off(start_point, stop_point)
             if command == "switch":
@@ -135,12 +135,13 @@ def main():
         #after these adjustments, need to count the lights which are on using the light_count function  
         print(lights.light_count())
         
-    else:    
+    #else:    
     # sys.argv is used to read arguments from the command line
-        print("Please check parameters: third argument must be the input file") 
+    #    print("Please check parameters: third argument must be the input file") 
      
         
-if _name_ == '_main_':
+if __name__ == '__main__':
     main()
             
+
 
