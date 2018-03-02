@@ -2,7 +2,7 @@
 import sys 
 import urllib.request
 import re
-from pip import commands
+
 
 
 def file_exists(filename):
@@ -140,7 +140,7 @@ def main():
         print("Please check parameters: third argument must be the input file") 
      
         
-if __name__ == '__main__':
+if __file__ == '__main__':
     main()
             
 
