@@ -140,6 +140,7 @@ def main():
         print("Please check parameters: third argument must be the input file") 
      
         
-    
+if _name_ == '_main_':
+    main()
             
 

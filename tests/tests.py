@@ -81,7 +81,7 @@ def test_light_count():
     test.turn_on([0,0],[100,100])
     assert test.light_count() == 10201
     
-    
+  
     
     
     
