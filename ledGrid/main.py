@@ -41,31 +41,21 @@ class LightTester():
         self.lights = [[False]*N for _ in range(N)]
         self.size = N
         
-    def within_grid(self, start, stop):
+    def within_grid(self, point):
         ''' this function checks if a stop or start point from instruction is within the size of the grid. If not, changes the value'''
         # use self.size -1 as its 1000*1000 square where the max value is 999
         
-        if start[0] < 0:
-            start[0] = 0
-        if start[0] > self.size:
-            start[0] = (self.size - 1)
-            
-        if start[1] < 0:
-            start[1] = 0
-        if start[1] > self.size:
-            start[1] = (self.size - 1) 
+        if point[0] < 0:
+            point[0] = 0
+        if point[0] > self.size:
+            point[0] = (self.size - 1)
         
-        if stop[0] < 0:
-            stop[0] = 0
-        if stop[0] > self.size:
-            stop[0] = (self.size - 1) 
-            
-        if stop[1] < 0:
-            stop[1] = 0
-        if stop[1] > self.size:
-            stop[1] = (self.size - 1)
-            
-        return start, stop
+        if point[1] < 0:
+            point[1] = 0
+        if point[1] > self.size:
+            point[1] = (self.size - 1)       
+       
+        return point
     
     def turn_on(self, start, stop):
         '''turns on lights given the start and stop coordinates. True is on'''
@@ -127,9 +117,12 @@ def main():
         for i in range(0,len(commands_array)):
             command = commands_array[i][0]
             #print(command)
-            start_point = coordinates(commands_array[i][1:3]) 
+            start = coordinates(commands_array[i][1:3]) 
+            start_point = lights.within_grid(start)
             #print(start_point)
-            stop_point = coordinates(commands_array[i][3:])
+            stop = coordinates(commands_array[i][3:])
+            stop_point = lights.within_grid(stop)
+            
             #print(stop_point)
              #The next three if statements call the necessary method with our start and stop points 
             if command == "turn on":
