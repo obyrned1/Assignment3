@@ -2,6 +2,8 @@
 import sys 
 import urllib.request
 import re
+from _tracemalloc import stop
+from turtledemo.penrose import star
 
 
 
@@ -106,24 +108,29 @@ class LightTester():
                   
                     
 def main():
-   # if len(sys.argv) >= 3:     
+    if len(sys.argv) >= 3:     
         #index two of sys.argv is the file/http address
-        commands_list = file_exists("http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt")
+        commands_list = file_exists(sys.argv[2])
         # returns contents of file in a string
         commands_array = string_convert(commands_list)
-        print(commands_array)
+        #print(commands_array)
+        
         # converts that string to a structured array
         num_lights = int(commands_list.split('\n')[0])
+        #print(num_lights)
         # this takes the first line of the commands, which is always the N number of lights in the grid
         lights = LightTester(num_lights)
         
         # now have number of lights and array with instructions
         # need to loop through each index and first extract the start and stop points
         # then extract the command, and call the relevant function using the stop and start points
-        for i in range(0,num_lights):
-            start_point = coordinates(commands_array[i][1:3]) 
-            stop_point = coordinates(commands_array[i][3:5])
+        for i in range(0,len(commands_array)):
             command = commands_array[i][0]
+            #print(command)
+            start_point = coordinates(commands_array[i][1:3]) 
+            #print(start_point)
+            stop_point = coordinates(commands_array[i][3:])
+            #print(stop_point)
              #The next three if statements call the necessary method with our start and stop points 
             if command == "turn on":
                lights.turn_on(start_point, stop_point)                
@@ -133,7 +140,7 @@ def main():
                  lights.switch(start_point, stop_point)
         
         #after these adjustments, need to count the lights which are on using the light_count function  
-        print(lights.light_count())
+        print("The number of lights turned on: ", lights.light_count())
         
     #else:    
     # sys.argv is used to read arguments from the command line
