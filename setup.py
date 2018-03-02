@@ -32,8 +32,7 @@ setup(
     ],
     keywords='',
     packages=find_packages(exclude=['docs', 'tests*']),
-    entry_points={
-        'console_scripts':['ledGrid=ledGrid.main:main']},
+    entry_points={'console_scripts':['ledGrid=ledGrid.main:main']},
     include_package_data=True,
     author='Daniel O Byrne',
     install_requires=install_requires,
