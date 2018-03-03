@@ -2,10 +2,6 @@
 import sys 
 import urllib.request
 import re
-from _tracemalloc import stop
-from turtledemo.penrose import star
-
-
 
 def file_exists(filename):
     '''Checks if a file exists in the local address or a network address that is given'''
@@ -47,12 +43,12 @@ class LightTester():
         
         if point[0] < 0:
             point[0] = 0
-        if point[0] > self.size:
+        if point[0] >= self.size:
             point[0] = (self.size - 1)
         
         if point[1] < 0:
             point[1] = 0
-        if point[1] > self.size:
+        if point[1] >= self.size:
             point[1] = (self.size - 1)       
        
         return point
@@ -66,7 +62,7 @@ class LightTester():
                     self.lights[i][j] = True
                     
     def turn_off(self, start, stop):
-        '''turns off lights given the start and stop coordinates. False is off'''
+        ''' turns off lights given the start and stop coordinates. False is off'''
         if start[0] <= stop[0] and start[1] <= stop[1]:
         #assumes that start points are below (to the left) of stop points of per assignment slides
             for i in range (start[0], (stop[0] + 1)):
@@ -81,17 +77,15 @@ class LightTester():
                 for j in range (start[1], (stop[1] + 1)):
                     if self.lights[i][j] == False:
                         self.lights[i][j] = True
-                    else:
+                    elif self.lights[i][j] == True:
                          self.lights[i][j] = False
     
     def light_count(self):
         '''count all occurrences of true that after all commands have been dealt with by on off and switch function'''  
         count = 0
-        #loop through all rows and columns and count Trues  
-        start = [0,0]
-        stop = [999,999] 
-        for i in range (start[0], (stop[0] + 1)):
-                for j in range (start[1], (stop[1] + 1)):
+        #loop through all rows and columns and count Trues
+        for i in range (0, self.size):
+                for j in range (0, self.size):
                     if self.lights[i][j] == True:
                         count +=1
         return count     
@@ -103,11 +97,10 @@ def main():
         commands_list = file_exists(sys.argv[2])
         # returns contents of file in a string
         commands_array = string_convert(commands_list)
-        #print(commands_array)
-        
+               
         # converts that string to a structured array
         num_lights = int(commands_list.split('\n')[0])
-        #print(num_lights)
+        print("There are ", num_lights, " X ", num_lights, " lights in this grid")
         # this takes the first line of the commands, which is always the N number of lights in the grid
         lights = LightTester(num_lights)
         
@@ -116,14 +109,15 @@ def main():
         # then extract the command, and call the relevant function using the stop and start points
         for i in range(0,len(commands_array)):
             command = commands_array[i][0]
-            #print(command)
+          
             start = coordinates(commands_array[i][1:3]) 
+         
             start_point = lights.within_grid(start)
-            #print(start_point)
+          
             stop = coordinates(commands_array[i][3:])
+           
             stop_point = lights.within_grid(stop)
-            
-            #print(stop_point)
+         
              #The next three if statements call the necessary method with our start and stop points 
             if command == "turn on":
                lights.turn_on(start_point, stop_point)                
@@ -135,9 +129,9 @@ def main():
         #after these adjustments, need to count the lights which are on using the light_count function  
         print("The number of lights turned on: ", lights.light_count())
         
-    #else:    
+    else:    
     # sys.argv is used to read arguments from the command line
-    #    print("Please check parameters: third argument must be the input file") 
+        print("Please check parameters: third argument must be the input file") 
      
         
 if __name__ == '__main__':

@@ -14,7 +14,8 @@ def test_file_exists():
     
 def test_string_convert():
     test_file = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt"
-    output = string_convert(test_file) 
+    test_string = file_exists(test_file)
+    output = string_convert(test_string) 
     assert output[0] == ('switch', '109', '360', '331', '987') 
 
 def test_coordinates():
@@ -25,8 +26,8 @@ def test_coordinates():
 def test_within_grid():
     '''test check if coordinates for a start and stop point that are outside the grid, convert to 0 or the size of grid if they are less or more than those figures'''
     grid = LightTester(1000)
-    test_startstop = grid.within_grid([-123,123],[2000,1200])
-    assert test_startstop == ([0,123],[999,999])
+    test_startstop = grid.within_grid([-123,2000])
+    assert test_startstop == ([0,999])
 
 def test_turn_on():
     '''test if area covered by given coordinates are converted to True'''
