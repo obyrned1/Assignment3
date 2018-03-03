@@ -19,8 +19,14 @@ To install use pip:
 
 Or clone the repo:
 
-    $ git clone https://github.com/obyrned1/ledGrid.git
+    $ git clone https://github.com/obyrned1/Assignment3.git
     $ python setup.py install
+
+After installing the ledGrid module, it can be used by entering the following command:
+
+    $ ledGrid --input *File address*
+
+The *File address* can be a network address or the address of a local file
     
 Contributing
 ------------
